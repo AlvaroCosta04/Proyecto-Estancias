@@ -1,0 +1,241 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.success {
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border-radius: 0.25rem;
+    width: 32%;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 40px;
+}
+.container{
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px #ccc;
+}
+h1 {
+    color: #6A5ACD;
+    text-align: center;
+    margin-top: 50px;
+}
+.container p{
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+form {
+    display: grid;
+    place-items: center;
+    text-align: center;
+    width: 50%;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ccc;
+}
+
+.recoverPassword{
+    display: block;
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.custom-file-upload {
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+    background-color: #007bff;
+    border: 1px solid#007bff;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+}
+.custom-file-upload:hover {
+    background-color: #007bff;
+    border: 1px solid #007bff;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"]{
+    width: 85%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+input[type="submit"] {
+    background-color: #6A5ACD;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.descripcion {
+    resize: none;
+    white-space: pre-wrap;
+    margin-bottom: 40px;
+    height: 100px;
+    width: 643px;
+}
+
+.code-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.code-boxes {
+    display: flex;
+    gap: 5px;
+}
+
+.code-box {
+    width: 30px; 
+    height: 30px;
+    border: 1px solid #000;
+    font-size: 18px;
+    text-align: center;
+}
+
+
+#imagen {
+    display: none;
+}
+
+.boton {
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #6A5ACD;
+    color: #ffffff;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border: none;
+    margin-top: 10px;
+
+}
+
+.imageFile {
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #fefefe;
+    color: #000;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border: none;
+    margin-top: 10px;
+
+}
+
+.imageFile::-webkit-file-upload-button {
+    background-color: #7B6CD3;
+    color: #ffffff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    /*box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);*/
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.imageFile::-webkit-file-upload-button:hover{
+    transform: translateY(-5px);
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+/*.boton input[type="file"] {
+    display: none;
+}*/
+
+.button-sumbit{
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #6A5ACD;
+    color: #ffffff;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border: none;
+    margin-top: 10px;
+    transition: all 0.2s ease-in-out;
+}
+
+.button-sumbit:hover{
+    transform: translateY(-5px);
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+h3 {
+    font-size: 1.6rem;
+}
+
+.form_imageinput p{
+    font-size: 1.1rem;
+}
+
+#previsualizacion{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-profile {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+    border: 5px solid #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.imgHouse img {
+    max-width: 350px;
+    height: auto;
+   /* max-width: 100%;
+    max-height: 100%;*/
+    object-fit: cover;
+    border-radius: 15%;
+    margin-right: 20px;
+    border: 5px solid #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+.line {
+    height: 2px;
+    width: 100%;
+    background-color: #6A5ACD;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html id="htmlID">
+    <head>
+        <title>Formulario de Creación de Reserva</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+        <link rel="stylesheet" href="../css/navStyle.css">
+        <link rel="stylesheet" type="text/css" href="../css/bookingStyle.css">
+
+    </head>
+    <body>
+
+        <nav>
+            <ul>
+                <li class="dropdown">
+                    <a href="#">Perfil <i class="fa fa-angle-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a th:href="@{/user/notifications}">Notificaciones</a></li>
+                        <li><a th:href="@{/user}">Ver perfil</a></li>
+                        <li><a th:href="@{/update-user}">Modificar perfil</a></li>
+                        <li><a th:href="@{/logout}">Cerrar sesión</a></li>
+                    </ul>
+                </li>
+                <li><a th:href="@{/home}">Inicio</a></li>
+                <li><a th:href="@{/view-reserve/myReserves-tenant}">Reservas Alquiladas</a></li>
+                <li><a th:href="@{/view-reserve/myReserves-owner}">Reservas Publicadas</a></li>
+            </ul>
+        </nav>
+
+        <!--<h1>Agenda la reserva</h1>-->
+
+        <div th:if="${exito != null}" class="success">
+            <span th:text="${exito}"></span>
+        </div>
+
+        <div th:if="${error != null}" class="alert-danger" role="alert">
+            <span th:text="${error}"></span>
+        </div>
+
+        <form
+            th:action="@{/booking-reserve/bookingpost}"
+            method="POST"> 
+
+            <h3>Reserva Ingreso</h3>
+            <div class="line"></div>
+
+            <div class="additionalInformation">
+                <p>La cantidad de dias mínimos es: <span th:text="${minDays}"></span></p>
+                <p>La cantidad de dias máximos es: <span th:text="${maxDays}"></span></p>
+                <p>Precio x Día: <span th:text="${price}"></span></p>
+            </div>
+
+            <input hidden="" 
+                   id="idReserve" 
+                   name="idReserve" 
+                   th:value="${idReserve}">
+            <input type="hidden" 
+                   id="startDateInput" 
+                   name="startDate">
+
+            <input type="hidden" 
+                   id="endDateInput"
+                   name="endDate">
+
+
+            <!--<div id="dateRangeCalendarContainer">-->
+            <div id="dateRangeCalendar"></div>
+            <!--</div>-->
+
+            <!--<p id="dateRangeDisplay"></p>-->
+
+            <input class="button" type="submit" value="Reservar estancia">
+        </form>
+
+        <datalist id="unavailableDatesList">
+            <th:block th:each="date : ${unavailableDates}">
+                <option th:text="${date}"></option>
+            </th:block>
+        </datalist>
+
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <script src="../js/bookingCalendar.js"></script>
+    </body>
+</html> 

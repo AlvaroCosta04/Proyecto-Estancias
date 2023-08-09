@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Perfil de Usuario</title>
+        <link rel="stylesheet" href="../css/navStyle.css">
+        <link rel="stylesheet" href="../css/profileStyle.css"> 
+        <script src="../js/menuPerfil.js"></script>
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li th:if="${profile != null}" class="dropdown">
+                    <a href="#">Perfil <i class="fa fa-angle-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li th:if="${profile != null}"><a th:href="@{/user/notifications}">Notificaciones</a></li>
+                        <li th:if="${profile != null}"><a th:href="@{/update-user}">Modificar perfil</a></li>
+                        <li th:if="${profile != null}"><a th:href="@{/logout}">Cerrar sesión</a></li>
+                    </ul>
+                </li>
+                <li th:if="${profile != null}"><a th:href="@{/home}">Inicio</a></li>
+                <li th:if="${profile != null}"><a th:href="@{/view-reserve/myReserves-tenant}">Reservas Alquiladas</a></li>
+                <li th:if="${profile != null}"><a th:href="@{/view-reserve/myReserves-owner}">Reservas Publicadas</a></li>
+
+                <li th:if="${profile == null}"><a th:href="@{/login}">¡Inicie sesión!</a></li>
+                <li th:if="${profile == null}"><a th:href="@{/signup/user}">¡Crea una cuenta!</a></li>
+                <li th:if="${profile == null}"><a th:href="@{/}">Inicio</a></li>
+            </ul>
+        </nav>
+
+        <div class="contenedor">
+            <!-- <img src="../img/imagen_cv.jpg" alt="Foto de Perfil" onerror="this.src='http://cdn.onlinewebfonts.com/svg/img_464447.png'"> -->
+            <img th:src="'data:image/png;base64,' + ${profile.image}"
+                 onerror="this.src='http://cdn.onlinewebfonts.com/svg/img_464447.png'" class="rounded-circle" alt="example placeholder" style="width: 200px; height: 200px" />
+            <div class="informacion-usuario">
+                <h1>Perfil</h1>
+                <p th:text="'Descripcion: ' + ${profile.description}"></p>
+                <p th:text="'Nombre: ' + ${profile.name}"></p>
+                <p th:text="'Apellido: ' + ${profile.last_name}"></p> 
+                <p th:text="'User Name: ' + ${profile.user_name}"></p>
+
+            </div>
+        </div>
+    </body>
+</html>

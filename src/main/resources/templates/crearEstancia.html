@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Formulario de Creación de Reserva</title>
+        <link rel="stylesheet" href="../css/navStyle.css">
+        <link rel="stylesheet" href="../css/createAccountStyle.css">
+        <script src="../js/menuPerfil.js"></script>
+    </head>
+    <body>
+
+        <nav>
+            <ul>
+                <li class="dropdown">
+                    <a href="#">Perfil <i class="fa fa-angle-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a th:href="@{/user/notifications}">Notificaciones</a></li>
+                        <li><a th:href="@{/user}">Ver perfil</a></li>
+                        <li><a th:href="@{/update-user}">Modificar perfil</a></li>
+                        <li><a th:href="@{/logout}">Cerrar sesión</a></li>
+                    </ul>
+                </li>
+                <li><a th:href="@{/home}">Inicio</a></li>
+                <li><a th:href="@{/view-reserve/myReserves-tenant}">Reservas Alquiladas</a></li>
+                <li><a th:href="@{/view-reserve/myReserves-owner}">Reservas Publicadas</a></li>
+            </ul>
+        </nav>
+
+        <h1>¡Últimos Datos de su Estancia!</h1>
+
+        <div th:if="${exito != null}" class="success">
+            <span th:text="${exito}"></span>
+        </div>
+
+        <form
+            th:action="@{/reserve/post}" 
+            method="POST"  
+            th:object="${reserve}">
+
+            <label for="minDays">Días Mínimos:</label>
+            <p>Los usuarios no podran reservar esta estancia por una duracion de dias menor a la que establezcas</p>
+            <input 
+                type="number" 
+                id="minDays" 
+                name="minDays" 
+                th:field="*{minDays}" 
+                th:value="${minDays}" 
+                required min="1"><br><br>
+
+            <label for="maxDays">Días Máximos:</label>
+            <p>Los usuarios no podran reservar esta estancia por una duracion de dias mayor a la que establezcas</p>
+            <input 
+                type="number" 
+                id="maxDays" 
+                name="maxDays" 
+                th:field="*{maxDays}" 
+                th:value="${maxDays}" 
+                required min="1"><br><br>
+
+            <label for="price">Precio:</label>
+            <p>Establece el precio en dólares por días que tendrá esta estancia</p>
+            <input 
+                type="number" 
+                id="price" 
+                name="price" 
+                th:field="*{price}" 
+                th:value="${price}" 
+                required min="1"><br><br>
+
+            <input type="submit" value="Crear Reserva">
+        </form>
+    </body>
+</html>

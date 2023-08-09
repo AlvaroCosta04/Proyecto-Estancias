@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html  lang="en"
+       xmlns:th="http://www.thymeleaf.org"
+       xmlns="http://www.w3.org/1999/xhml"
+       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Estancias en el extranjero</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+        <link rel="stylesheet" href="../css/navStyle.css">
+        <link rel="stylesheet" href="../css/style_index.css">
+        <script src="../js/searchProvencie.js"></script>
+    </head>
+    <body>
+
+        <nav>
+            <ul class="navul">
+                <li>
+                    <a href="#">Perfil</a>
+                    <ul class="profile">
+                        <li><a th:href="@{/user/notifications}">Notificaciones</a></li>
+                        <li><a th:href="@{/user}">Ver perfil</a></li>
+                        <li><a th:href="@{/update-user}">Modificar perfil</a></li>
+                        <li><a th:href="@{/logout}">Cerrar Sesión</a></li>
+                    </ul>
+                </li>
+                <li><a th:href="@{/view-reserve/myReserves-tenant}">Reservas Alquiladas</a></li>
+                <li><a th:href="@{/view-reserve/myReserves-owner}">Reservas Publicadas</a></li>
+            </ul>
+
+        </nav>
+
+        <header>
+            <h1>Estancias en Argentina</h1>
+            <p>¡Descubre el próximo hogar para tu familia!</p>
+            <div th:if="${success != null}" class="success">
+                <span th:text="${success}"></span>
+            </div>
+        </header>
+
+        <main>
+            <div class="house" th:if="${user.getHouse() != null}">
+                <h2>¡Mi Estancia!</h2>
+                <li class="options"><a th:href="@{/dwelling/modify}">Modifique La Propiedad</a></li>
+                <li class="options" th:if="${reserve.getOwner() == null}"><a th:href="@{/reserve/}">Termine de Ingresar su Estancia</a></li>
+                <li class="options" th:if="${reserve.getOwner() != null}"><a th:href="@{/reserve/modify}">Modifique su Estancia</a></li>
+            </div>
+
+            <div class="house" th:if="${user.getHouse() == null}">
+                <h2>¡Publique una propiedad!</h2>
+                <li class="options"><a th:href="@{/start-reserve}">¡Haz Click Aquí!</a></li>
+            </div>
+
+
+            <div class="searchHouse">
+                <h2>¡Búsque su Próximo Hogar!</h2>
+                <div class="line"></div>
+
+                <!--<a id="viewReserves" th:href="@{/view-reserve/all}">Ver Estancias</a>
+
+                <div class="searchProvencie">
+                    <h3>¡Busque una provincia por su nombre!</h3>
+                    <form th:action="@{/view-reserve/redirect-province}" method="GET">
+                        <input list="provinces" id="provinceInput" name="provinceInput">
+                        <datalist id="provinces">
+                            <option th:each="province : ${provinces}" th:value="${province.name}" th:text="${province.name}"></option>
+                        </datalist>
+                        <br><br>
+                        <button class="button-reserve-view" type="submit">Buscar</button>
+                    </form> 
+                </div>
+
+                <div class="container">
+                    <section class="left">
+                        <div class="optionsContainer">
+                            <h2>Destinos</h2>
+                            <p>¡Las 5 provincias mas populares!</p>
+                            <ul >
+                                <li class="options" th:each="province : ${provincesNames}">
+                                    <a th:href="@{/view-reserve/province-{province}(province=${province})}">
+                                        <span th:text="${province}"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+                    <section class="right">
+                        <div class="optionsContainer">
+                            <h2>Tipos de estancia</h2>
+                            <p>¡Elija el tipo de estancia que está buscando!</p>
+                            <ul>
+                                <li class="options">
+                                    <a th:href="@{/view-reserve/houseType-casa}">
+                                        <span>Casa</span>
+                                    </a>
+                                </li>
+                                <li class="options">
+                                    <a th:href="@{/view-reserve/houseType-departamento}">
+                                        <span>Departamento</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+                </div>-->
+                <form
+                    th:action="@{/view-reserve/custom-properties}"
+                    method="GET"> 
+
+                    <h3>Busque una propiedad a su medida</h3>
+
+                    <div th:if="${error != null}" class="alert-danger" role="alert">
+                        <span th:text="${error}"></span>
+                    </div>
+
+                    <input type="hidden" id="redirectPage" th:value="home" name="redirectPage"> 
+                    <label for="provincia">Provincia:</label>
+                    <br>
+                    <select id="provincia" name="provinceName" th:value="${provinceName}" required>
+                        <datalist id="provinces">
+                            <option th:each="province : ${provinces}" th:value="${province.name}" th:text="${province.name}"></option>
+                        </datalist>
+                    </select>
+                    <br>
+
+                    <label for="tipo-casa">Tipo de casa:</label>
+                    <br>
+                    <select id="tipo-casa" name="houseType" th:value="${houseType}" required>
+                        <option value="casa">Casa</option>
+                        <option value="departamento">Departamento</option>
+                    </select>
+                    <br>
+
+                    <label for="precioMin">Precio Mínimo por día:</label>
+                    <br>
+                    <input type="number" id="precioMin" name="precioMin" min="0" th:value="${precioMin}" required/>
+                    <br>
+
+                    <label for="precioMax">Precio Máximo por día:</label>
+                    <br>
+                    <input type="number" id="precioMax" name="precioMax" min="0" th:value="${precioMax}" required/>
+                    <br>
+
+                    <p class="calendarTitle">Ingrese la fecha en la que desea buscar propiedades disponibles</p>
+                    <input type="hidden" id="startDateInput" name="startDate">
+                    <input type="hidden" id="endDateInput" name="endDate">
+
+                    <div id="dateRangeCalendar"></div>           
+
+                    <input id="dateRangeButton" type="submit" value="Busque una propiedad">
+                </form>
+            </div>
+
+            <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+            <script src="../js/searchProperty.js"></script>
+        </main>
+
+        <footer>
+
+        </footer>
+    </body>
+</html>

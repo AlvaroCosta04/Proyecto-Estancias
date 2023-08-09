@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html  lang="en"
+       xmlns:th="http://www.thymeleaf.org"
+       xmlns="http://www.w3.org/1999/xhml"
+       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Estancias en el extranjero</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+        <link rel="stylesheet" href="../css/navStyle.css">
+        <link rel="stylesheet" href="../css/style_index.css">
+        <script src="../js/searchProvencie.js"></script>
+    </head>
+    <body>
+
+        <nav>
+            <ul>
+                <li><a th:href="@{/login}">¡Inicie sesión!</a></li>
+                <li><a th:href="@{/signup/user}">¡Crea una cuenta!</a></li>
+                <li class="searcher">
+                    <form th:action="@{/view-reserve/redirect-province}" method="GET">
+                     <!--   <li>
+                            <input list="provinces" id="provinceInput" name="provinceInput">
+                        </li>
+                        <datalist id="provinces">
+                            <option th:each="province : ${provinces}" th:value="${province.name}" th:text="${province.name}"></option>
+                        </datalist>
+                        <button class="button-reserve-view" type="submit">Buscar</button> -->
+                    </form> 
+                </li>
+            </ul>
+
+        </nav>
+
+        <header>
+            <h1>Estancias en Argentina</h1>
+            <p>¡Descubre el próximo hogar para tu familia!</p>
+        </header>
+        
+        <div th:if="${success != null}" class="success">
+            <span th:text="${success}"></span>
+        </div>
+
+        <main>
+            <div class="searchHouse">
+                <h2>¡Búsque su Próximo Hogar!</h2>
+
+                <div class="line"></div>
+                <form
+                    th:action="@{/view-reserve/custom-properties}"
+                    method="GET"> 
+
+                    <h3>Busque una propiedad a su medida</h3>
+
+                    <div th:if="${error != null}" class="alert-danger" role="alert">
+                        <span th:text="${error}"></span>
+                    </div>
+
+                    <label for="provincia">Provincia:</label>
+                    <br>
+                    <select id="provincia" name="provinceName" th:value="${provinceName}" required>
+                        <datalist id="provinces">
+                            <option th:each="province : ${provinces}" th:value="${province.name}" th:text="${province.name}"></option>
+                        </datalist>
+                    </select>
+                    <br>
+
+                    <label for="tipo-casa">Tipo de casa:</label>
+                    <br>
+                    <select id="tipo-casa" name="houseType" th:value="${houseType}" required>
+                        <option value="casa">Casa</option>
+                        <option value="departamento">Departamento</option>
+                    </select>
+                    <br>
+
+                    <label for="precioMin">Precio Mínimo por día:</label>
+                    <br>
+                    <input type="number" id="precioMin" name="precioMin" min="0" th:value="${precioMin}" required/>
+                    <br>
+
+                    <label for="precioMax">Precio Máximo por día:</label>
+                    <br>
+                    <input type="number" id="precioMax" name="precioMax" min="0" th:value="${precioMax}" required/>
+                    <br>
+
+                    <p class="calendarTitle">Ingrese la fecha en la que desea buscar propiedades disponibles</p>
+                    <input type="hidden" id="startDateInput" name="startDate">
+                    <input type="hidden" id="endDateInput" name="endDate">
+
+                    <div id="dateRangeCalendar"></div>           
+
+                    <input id="dateRangeButton" type="submit" value="Busque una propiedad">
+                </form>
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+            <script src="../js/searchProperty.js"></script>
+        </main>
+
+        <footer>
+
+        </footer>
+    </body>
+</html>

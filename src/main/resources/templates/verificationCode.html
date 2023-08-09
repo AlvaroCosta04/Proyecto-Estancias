@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Verification Code</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../css/navStyle.css">
+        <link rel="stylesheet" href="../css/createAccountStyle.css">
+        <script src="../js/verificationCode.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Código de verificación</h1>
+            <p>Enviamos un código de verificación al correo: <span th:text="${userMail}"></span>  Tiene un márgen entre 45 minutos y 1h de utilidad antes que caduque</p>
+        </div>
+        <div th:if="${error != null}" class="alert-danger" role="alert">
+            <span th:text="${error}"></span>
+        </div>
+
+        <form th:action="@{/resettingPassword/step2-post}" method="POST">
+
+            <div class="code-input">
+                <label for="verificationCode">Código de verificación:</label>
+
+                <div class="code-boxes">
+                    <input type="text" id="box1" class="code-box" maxlength="1" required>
+                    <input type="text" id="box2" class="code-box" maxlength="1" required>
+                    <input type="text" id="box3" class="code-box" maxlength="1" required>
+                    <input type="text" id="box4" class="code-box" maxlength="1" required>
+                    <input type="text" id="box5" class="code-box" maxlength="1" required>
+                    <input type="text" id="box6" class="code-box" maxlength="1" required>
+                    <input type="text" id="box7" class="code-box" maxlength="1" required>
+                </div>
+                <input type="hidden" id="verificationCode" name="verificationCode">
+                <input hidden="" id="userMail" name="userMail" th:value="${userMail}">
+
+                <button class="button-sumbit" type="submit">Buscar</button>
+            </div>
+        </form>
+    </body>
+</html>
+
+
+
+
+
+
+

@@ -1,0 +1,122 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1{
+    text-align: center;
+}
+
+.slider {
+    position: relative;
+    max-width: 60%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.slides {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+    height: 100%;
+}
+
+.slide {
+    flex: 0 0 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slider img {
+    margin-top: 30px;
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+}
+
+.prev,
+.next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 10px;
+    background-color: rgba(51, 51, 51, 0.2);
+    color: #fff;
+    text-decoration: none;
+}
+
+.prev {
+    left: 10px;
+    cursor: pointer;
+}
+
+.next {
+    right: 10px;
+    cursor: pointer;
+}
+
+.success {
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border-radius: 0.25rem;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 27px;
+}
+
+.card-container li {
+    font-size: 20px;
+    text-align: center;
+    flex-basis: calc(50% - 20px);
+    margin: 10px;
+}
+
+.card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+}
+
+.card-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.button{
+    display: inline-block;
+    border-radius: 6px;
+    background-color: #6A5ACD;
+    color: #ffffff;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border: none;
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+
+.bookingButton {
+  display: flex;
+  justify-content: center;
+}
+
+
+
+@media (max-width: 768px) {
+    .slider {
+        max-width: 100%; /* Cambia el ancho máximo en dispositivos más pequeños */
+    }
+
+    .slider img {
+        max-height: 300px; /* Ajusta la altura máxima en dispositivos más pequeños */
+    }
+}

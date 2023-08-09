@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rental Request</title>
+        <link rel="stylesheet" href="../css/navStyle.css">
+        <link rel="stylesheet" href="../css/rentalRequest.css">
+    </head>
+    <body>
+        <h1>Rental Request</h1>
+
+        <div class="card">
+            <p th:text="${notification.message}"></p>
+            <div class="user-details">
+                <h2>User Details</h2>
+                <p><strong>Name:</strong> <span th:text="${notification.sender.name}"></span><span th:text="${notification.sender.last_name}"></span></p>
+                <p><strong>Email:</strong> <span th:text="${notification.sender.email}"></span></p>
+                <p><strong>UserName:</strong> <span th:text="${notification.sender.user_name}"></span></p>
+            </div>
+
+            <div class="property-details">
+                <h2>Property Details</h2>
+                <p><strong>Title:</strong> Beautiful Villa</p>
+                <p><strong>Location:</strong> Beachfront</p>
+                <p><strong>Price:</strong> $200 per night</p>
+                <p><strong>Description:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+
+            <div class="buttons">
+                <form th:action="@{/booking-reserve/accept}" method="post">
+                    <input type="hidden" name="id" th:value="${notification.booking.id}" />
+                    <input type="hidden" name="idNotification" th:value="${notification.id}" />
+                    <button type="submit" class="confirm-button">Confirmar</button>
+                </form>
+
+                <form th:action="@{/booking-reserve/deny}" method="post">
+                    <input type="hidden" name="id" th:value="${notification.booking.id}" />
+                    <input type="hidden" name="idNotification" th:value="${notification.id}" />
+                    <button type="submit" class="deny-button">Rechazar</button>
+                </form>
+
+            </div>
+        </div>
+    </body>
+</html>

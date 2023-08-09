@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Verifying User Email</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../css/navStyle.css">
+        <link rel="stylesheet" href="../css/createAccountStyle.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Restaure su contraseña</h1>
+            <p>Como primer paso, necesitamos que nos proporcione el correo asociado a su cuenta</p>
+        </div>
+        <div th:if="${error != null}" class="alert-danger" role="alert">
+            <span th:text="${error}"></span>
+        </div>
+        <form th:action="@{/resettingPassword/step1-post}" method="POST">
+            <label for="correo">Correo electrónico:</label>
+            <input type="email" 
+                   id="email" 
+                   name="email" 
+                   required>
+            <button class="button-sumbit" type="submit">Buscar</button>
+        </form> 
+    </body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Formulario de Registro de Vivienda</title>
+        <link rel="stylesheet" href="../css/navStyle.css">
+        <link rel="stylesheet" href="../css/createAccountStyle.css">
+        <script src="../js/menuPerfil.js"></script>
+    </head>
+    <body>
+
+        <nav>
+            <ul>
+                <li class="dropdown">
+                    <a href="#">Perfil <i class="fa fa-angle-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a th:href="@{/user/notifications}">Notificaciones</a></li>
+                        <li><a th:href="@{/user}">Ver perfil</a></li>
+                        <li><a th:href="@{/update-user}">Modificar perfil</a></li>
+                        <li><a th:href="@{/logout}">Cerrar sesión</a></li>
+                    </ul>
+                </li>
+                <li><a th:href="@{/home}">Inicio</a></li>
+                <li><a th:href="@{/view-reserve/myReserves-tenant}">Reservas Alquiladas</a></li>
+                <li><a th:href="@{/view-reserve/myReserves-owner}">Reservas Publicadas</a></li>
+            </ul>
+        </nav>
+
+        <h1>Registro de Vivienda</h1>
+        <form 
+            th:object="${house}"
+            method="post" 
+            enctype="multipart/form-data" 
+            th:action="@{/dwelling/modify-post}">
+
+            <label for="province">Provincia:</label>
+            <select id="province" name="province" th:field="*{province}">
+                <option value="">Seleccione una provincia</option>
+                <option th:each="province : ${provinces}"
+                        th:value="${province.id}"
+                        th:text="${province.name}"
+                        required>
+                </option>
+            </select><br>
+
+            <label for="city">Ciudad:</label>
+            <input 
+                type="text" 
+                id="city" 
+                name="city"
+                th:field="*{city}" 
+                th:value="${house.getCity}"
+                required><br><br>
+
+            <label for="street">Calle:</label>
+            <input 
+                type="text" 
+                id="street" 
+                name="street" 
+                th:field="*{street}" 
+                th:value="${house.getStreet}"
+                required><br><br>
+
+            <label for="number">Número:</label>
+            <input 
+                type="text" 
+                id="number" 
+                name="number" 
+                th:field="*{number}" 
+                th:value="${house.getNumber}"
+                required><br><br>
+
+            <label for="postalCode">Código Postal:</label>
+            <input 
+                type="text" 
+                id="postalCode" 
+                name="postalCode" 
+                th:field="*{postalCode}" 
+                th:value="${house.getPostalCode}"
+                required><br><br>
+
+
+            <label for="houseType">Tipo de Vivienda:</label>
+            <select 
+                id="houseType" 
+                name="houseType" 
+                th:field="*{houseType}" 
+                th:value="${house.getHouseType}"
+                required>
+                <option value="">Seleccione una opción</option>
+                <option value="casa">Casa</option>
+                <option value="departamento">Departamento</option>
+            </select><br><br>
+
+            <label for="images">Selecciona hasta 5 imágenes:</label>
+            <input 
+                type="file" 
+                id="images" 
+                name="images[]" 
+                multiple>
+            <i>(Ten en cuenta que debes mantener la tecla "Ctrl" para seleccionar mas de un archivo)</i>
+
+            <br>
+
+            <div class="imgHouse" th:each="image, iter : ${images}">
+                <img th:src="'data:image/png;base64,' + ${image}" 
+                     onerror="this.src='http://cdn.onlinewebfonts.com/svg/img_464447.png'" 
+                     alt="example placeholder" />
+            </div>
+
+
+            <input type="submit" value="Modificar Propiedad">
+        </form>
+        <script src="viviendaScript.JS"></script>
+    </body>
+</html>

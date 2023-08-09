@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Formulario de Crear Cuenta</title>
+        <link rel="stylesheet" href="../css/createAccountStyle.css">
+        <script src="https://cdn.jsdelivr.net/npm/compressorjs@1.1.0/dist/compressor.min.js"></script>
+        <link rel="stylesheet" href="../css/navStyle.css">
+        <script src="../js/verificationCode.js"></script>
+    </head>   
+
+    <header>
+        <nav>
+            <ul>
+                <li><a th:href="@{/}">Inicio</a></li>
+                <li><a th:href="@{/login}">¡Inicia sesión!</a></li>
+            </ul>
+        </nav>
+    </header>
+    <body>
+        <br>
+        <div th:if="${error != null}" class="alert alert-danger" role="alert">
+            <span th:text="${error}"></span>
+        </div>
+
+        <form th:action="@{/image/user}" 
+              method="GET">
+
+            <h3>¡Revisa tu correo!</h3>
+
+            <p>Hemos un código de verificación al siguiente correo: <span th:text="${email}"></span></p>
+
+            <!--<label for="verificationCode">¡Ingrese Aquí su código de verificación!</label>
+            <input type="text" id="verificationCode" name="verificationCode" required>-->
+
+            <div class="code-input">
+                <label for="verificationCode">¡Ingrese Aquí su código de verificación!</label>
+                <div class="code-boxes">
+                    <input type="text" id="box1" class="code-box" maxlength="1" required>
+                    <input type="text" id="box2" class="code-box" maxlength="1" required>
+                    <input type="text" id="box3" class="code-box" maxlength="1" required>
+                    <input type="text" id="box4" class="code-box" maxlength="1" required>
+                    <input type="text" id="box5" class="code-box" maxlength="1" required>
+                    <input type="text" id="box6" class="code-box" maxlength="1" required>
+                    <input type="text" id="box7" class="code-box" maxlength="1" required>
+                </div>
+                <input type="hidden" id="verificationCode" name="verificationCode">
+            </div>
+
+
+            <input type="submit" value="Verificar Código">
+        </form>
+    </body>
+</html>

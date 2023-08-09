@@ -1,0 +1,161 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="searchProperty.css">
+</head>
+<body>
+    <body>
+
+        <nav>
+            <ul class="navul">
+                <li>
+                    <a href="#"><span>Perfil</span><i></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><span>Notificaciones</span></a></li>
+                        <li><a th:href="@{/user}"><span>Ver perfil</span></a></li>
+                        <li><a th:href="@{/logout}"><span>Cerrar sesión</span></a></li>
+                    </ul>
+                </li>
+                <li><a th:href="@{/home}"><span>Inicio</span></a></li>
+            </ul>
+        </nav>
+
+
+        <div th:if="${exito != null}" class="success">
+            <span th:text="${exito}"></span>
+        </div>
+
+        <div th:if="${error != null}" class="alert-danger" role="alert">
+            <span th:text="${error}"></span>
+        </div>
+
+        <form
+            th:action="@{/booking-reserve/bookingpost}"
+            method="POST"> 
+
+            <h3>Busque una propiedad</h3>
+            <div class="line"></div>          
+           
+            <label for="provincia">Provincia:</label>
+            <select id="provincia" name="provincia">
+              <option value="provincia1">Provincia 1</option>
+              <option value="provincia2">Provincia 2</option>
+              <option value="provincia3">Provincia 3</option>
+            </select>
+
+            <label for="tipo-casa">Tipo de casa:</label>
+    <select id="tipo-casa" name="tipo-casa">
+      <option value="tipo1">Casa</option>
+      <option value="tipo2">Departamento</option>
+    </select>
+
+    <label for="precioMin">Precio mínimo:</label>
+    <input type="number" id="precioMin" name="precioMin" />
+
+    <label for="precioMax">Precio máximo:</label>
+    <input type="number" id="precioMax" name="precioMax" />
+
+            <input type="hidden" 
+                   id="startDateInput" 
+                   name="startDate">
+
+            <input type="hidden" 
+                   id="endDateInput"
+                   name="endDate">
+
+      
+            <div id="dateRangeCalendar"></div>
+
+            <p id="dateRangeDisplay"></p>
+
+            <input class="button" type="submit" value="Buscar propiedad">
+        </form>
+       
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <script src="searchProperty.js"></script>
+    </body>
+</body>
+</html>-->
+
+<!DOCTYPE html>
+<html id="htmlID">
+    <head>
+        <title>Formulario de Creación de Reserva</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+        <link rel="stylesheet" href="../css/navStyle.css">
+        <link rel="stylesheet" type="text/css" href="searchProperty.css">
+
+    </head>
+    <body>
+
+        <nav>
+            <ul class="navul">
+                <li>
+                    <a href="#"><span>Perfil</span><i></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><span>Notificaciones</span></a></li>
+                        <li><a th:href="@{/user}"><span>Ver perfil</span></a></li>
+                        <li><a th:href="@{/logout}"><span>Cerrar sesión</span></a></li>
+                    </ul>
+                </li>
+                <li><a th:href="@{/home}"><span>Inicio</span></a></li>
+            </ul>
+        </nav>
+
+        <div th:if="${exito != null}" class="success">
+            <span th:text="${exito}"></span>
+        </div>
+
+        <div th:if="${error != null}" class="alert-danger" role="alert">
+            <span th:text="${error}"></span>
+        </div>
+
+        <form
+            th:action="@{/view-reserve/custom-properties}"
+            method="POST"> 
+
+            <h3>Busque una propiedad</h3>
+
+            <label for="provincia">Provincia:</label>
+            <select id="provincia" name="provincia" required>
+                <option value="provincia1">Provincia 1</option>
+                <option value="provincia2">Provincia 2</option>
+                <option value="provincia3">Provincia 3</option>
+
+            </select>
+
+            <label for="tipo-casa">Tipo de casa:</label>
+            <select id="tipo-casa" name="tipo-casa" required>
+                <option value="tipo1">Casa</option>
+                <option value="tipo2">Departamento</option>
+            </select>
+
+            <label for="precioMin">Precio Mínimo:</label>
+            <input type="number" id="precioMin" name="precioMin" min="0" required/>
+
+            <label for="precioMax">Precio Máximo:</label>
+            <input type="number" id="precioMax" name="precioMax" min="0" required/>
+
+            <p class="calendarTitle">Ingrese la fecha en la que desea buscar propiedades disponibles</p>
+            <input type="hidden" 
+                   id="startDateInput" 
+                   name="startDate">
+
+            <input type="hidden" 
+                   id="endDateInput"
+                   name="endDate">
+
+            <div id="dateRangeCalendar"></div>           
+
+            <input class="button" type="submit" value="Busque una propiedad">
+        </form>
+
+        <datalist id="unavailableDatesList"></datalist>
+
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <script src="searchProperty.js"></script>
+    </body>
+</html> 

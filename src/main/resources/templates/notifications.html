@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../css/navStyle.css">
+        <link rel="stylesheet" type="text/css" href="../css/notifications.css">
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li class="dropdown">
+                    <a href="#">Perfil <i class="fa fa-angle-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a th:href="@{/user}">Ver perfil</a></li>
+                        <li><a th:href="@{/update-user}">Modificar perfil</a></li>
+                        <li><a th:href="@{/logout}">Cerrar sesión</a></li>
+                    </ul>
+                </li>
+                <li><a th:href="@{/home}">Inicio</a></li>
+                <li><a th:href="@{/view-reserve/myReserves-tenant}">Reservas Alquiladas</a></li>
+                <li><a th:href="@{/view-reserve/myReserves-owner}">Reservas Publicadas</a></li>
+            </ul>
+        </nav>
+
+        <h1>Notificaciones</h1>
+
+        <div class="card">
+
+            <div class="card" th:if="${notifications.size() == 0}">
+                <h3>No tienes ninguna notificación</h3>
+            </div>
+
+            <ul>
+                <li th:each="notification : ${notifications}">
+                    <div th:if="${notification.booking != null}" class="notification-content">
+                        <img th:src="'data:image/png;base64,' + ${notification.sender.image}"
+                             onerror="this.src='http://cdn.onlinewebfonts.com/svg/img_464447.png'" class="userImage" alt="example placeholder"/>
+                        <div class="notification-text">
+                            <!--<h4 th:text="${notification.Title}"></h4>
+                            <p th:text="${notification.message}"></p>
+                            <p th:text="${notification.sender.name}"></p>-->
+                            <h4>Tiene una nueva oferta de alquiler</h4>
+                            <p>
+                                <span th:text="${notification.sender.name}"></span> <span th:text="${notification.sender.last_name}"></span> está interesado/a en su propiedad publicada.</p>
+                            <br>
+                            <a th:href="@{/user/notification-{id} (id=${notification.id})}">Haz click para obtener mas detalles</a>
+                        </div>
+                    </div>
+
+                    <div th:if="${notification.booking == null}" class="notification-content">
+                        <img th:src="'data:image/png;base64,' + ${notification.sender.image}"
+                             onerror="this.src='http://cdn.onlinewebfonts.com/svg/img_464447.png'" class="userImage" alt="example placeholder"/>
+                        <div class="notification-text">
+                            <h4>Respuesta sobre su oferta de alquiler</h4>
+
+                            <p><span th:text="${notification.sender.name}"></span> <span th:text="${notification.sender.last_name}"></span></p>
+                            <p th:text="${notification.message}"></p>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+
+    </body>
+</html>

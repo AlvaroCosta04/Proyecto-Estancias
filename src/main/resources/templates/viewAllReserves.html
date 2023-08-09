@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>View All Reserves</title>
+        <link rel="stylesheet" href="../css/navStyle.css">
+        <link rel="stylesheet" href="../css/ViewAllReserves.css">
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li th:if="${user != null}" class="dropdown">
+                    <a href="#">Perfil <i class="fa fa-angle-down"></i></a>
+                    <ul class="profile">
+                        <li><a th:href="@{/user/notifications}">Notificaciones</a></li>
+                        <li><a th:href="@{/user}">Ver perfil</a></li>
+                        <li><a th:href="@{/update-user}">Modificar perfil</a></li>
+                        <li><a th:href="@{/logout}">Cerrar Sesión</a></li>
+                    </ul>
+                </li>
+                <li th:if="${user != null}"><a th:href="@{/home}">Inicio</a></li>
+                <li th:if="${user != null}"><a th:href="@{/view-reserve/myReserves-tenant}">Reservas Alquiladas</a></li>
+                <li th:if="${user != null}"><a th:href="@{/view-reserve/myReserves-owner}">Reservas Publicadas</a></li>
+
+                <li th:if="${user == null}"><a th:href="@{/login}">¡Inicie sesión!</a></li>
+                <li th:if="${user == null}"><a th:href="@{/signup/user}">¡Crea una cuenta!</a></li>
+                <li th:if="${user == null}"><a th:href="@{/}">Inicio</a></li>
+            </ul>
+        </nav>
+
+        <h2 th:if="${province != null}">Todas las Reservas de <span th:text="${province}"></span></h2>
+        <h2 th:if="${province == null}">Reservas </h2>
+        <div class="line"></div>
+
+        <div class="provinces" th:if="${provinceNull != null}">
+            <p>No se ha encontrado ninguna provincia relacionada con la búsqueda: "<span th:text="${provinceNull}"></span>"</p>
+            <li>
+                <div>
+                    <a th:href="@{/home}">¡Regrese al Inicio!</a>
+                </div>
+            </li>
+        </div>
+
+        <div class="provinces" th:if="${provincesName != null and provincesName.size() > 0}">
+            <p> Se ha encontrado más de un resultado con su búsqueda.</p>
+            <p>Por favor, seleccione una provincia:</p>
+            <li th:each="provinceName : ${provincesName}">
+                <div>
+                    <a th:href="@{/view-reserve/province-{province}(province=${provinceName})}">
+                        <p><span th:text="${provinceName}"></span></p>
+                    </a>
+                </div>
+            </li>
+        </div>
+
+        <div class="card" th:each="reserve, i : ${reserves}">
+            <div class="card-image">
+                <img th:src="'data:image/png;base64,' + ${images[__${i.index}__]}"/>
+            </div>
+            <div class="card-content">
+                <h3>Reserva #<span th:text="${reserve.id}"></span></h3>
+                <p>Dueño: <span th:text="${reserve.getOwner().getName()}"></span> <span th:text="${reserve.getOwner().getLast_name()}"></span></p>
+                <p>Precio por día: $<span th:text="${reserve.getPrice()}"></span></p>
+                <p>Días mínimos: <span th:text="${reserve.getMinDays()}"></span></p>
+                <p>Días máximos: <span th:text="${reserve.getMaxDays()}"></span></p>
+
+                <a th:if="${infoReserve == null}" th:href="@{/view-reserve/{id}(id=${reserve.id})}" class="button-view-reserve">Ver reserva</a>
+
+            </div>
+        </div>
+
+        <div class="card" th:if="${reserves.size() == 0}">
+            <h3>No hay ninguna reserva</h3>
+        </div>
+
+    </body>
+</html>

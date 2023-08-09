@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../css/navStyle.css">
+        <link rel="stylesheet" type="text/css" href="../css/ViewReserve.css">
+    </head>
+    <body>
+
+        <nav>
+            <ul>
+                <li th:if="${user != null}" class="dropdown">
+                    <a href="#">Perfil <i class="fa fa-angle-down"></i></a>
+                    <ul class="profile">
+                        <li><a th:href="@{/user/notifications}">Notificaciones</a></li>
+                        <li><a th:href="@{/user}">Ver perfil</a></li>
+                        <li><a th:href="@{/update-user}">Modificar perfil</a></li>
+                        <li><a th:href="@{/logout}">Cerrar Sesión</a></li>
+                    </ul>
+                </li>
+                <li th:if="${user != null}"><a th:href="@{/home}">Inicio</a></li>
+                <li th:if="${user != null}"><a th:href="@{/view-reserve/myReserves-tenant}">Reservas Alquiladas</a></li>
+                <li th:if="${user != null}"><a th:href="@{/view-reserve/myReserves-owner}">Reservas Publicadas</a></li>
+
+                <li th:if="${user == null}"><a th:href="@{/login}">¡Inicie sesión!</a></li>
+                <li th:if="${user == null}"><a th:href="@{/signup/user}">¡Crea una cuenta!</a></li>
+                <li th:if="${user == null}"><a th:href="@{/}">Inicio</a></li>
+            </ul>
+        </nav>
+
+        <div class="slider">
+            <div class="slides">
+                <div class="slide" th:each="image : ${images}">
+                    <img th:src="${'data:image/png;base64,' + image}" alt="imagen">
+                </div>
+            </div>
+            <a class="prev" onclick="prevSlide()"><</a>
+            <a class="next" onclick="nextSlide()">></a>
+        </div>
+
+        <script>
+            var currentIndex = 0;
+            var slides = document.querySelectorAll('.slide');
+            var totalSlides = slides.length;
+
+            function showSlide(index) {
+                if (index < 0) {
+                    index = totalSlides - 1;
+                } else if (index >= totalSlides) {
+                    index = 0;
+                }
+
+                var slideWidth = slides[0].offsetWidth;
+                var translateX = -index * slideWidth;
+
+                document.querySelector('.slides').style.transform = 'translateX(' + translateX + 'px)';
+                currentIndex = index;
+            }
+
+            function prevSlide() {
+                showSlide(currentIndex - 1);
+            }
+
+            function nextSlide() {
+                showSlide(currentIndex + 1);
+            }
+
+            showSlide(currentIndex);
+        </script>
+
+        <ul class="card-container">
+            <li>
+                <!--<div class="card">
+                    <p class="card-title">Propietario:</p>
+                    <p th:text="${reserve.owner.name + ' ' + reserve.owner.last_name}"></p>
+                </div>-->
+
+                <div class="card">
+                    <p class="card-title">Propietario:</p>
+                    <a th:href="@{/user/{id}(id=${reserve.owner.id})}" th:text="${reserve.owner.name + ' ' + reserve.owner.last_name}"></a>
+                </div>
+
+            </li> 
+            <li>
+                <div class="card">
+                    <p class="card-title">Dirección (calle):</p>
+                    <p th:text="${house.street}"></p>
+                </div>
+            </li>
+            <li>
+                <div class="card">
+                    <p class="card-title">Altura:</p>
+                    <p th:text="${house.number}"></p>
+                </div>
+            </li>
+            <li>
+                <div class="card">
+                    <p class="card-title">Código postal:</p>
+                    <p th:text="${house.postalCode}"></p>
+                </div>
+            </li>
+            <li>
+                <div class="card">
+                    <p class="card-title">Ciudad:</p>
+                    <p th:text="${house.city}"></p>
+                </div>
+            </li>
+            <!-- <li>
+                 <div class="card">
+                     <p class="card-title">País:</p>
+                     <p>Argentina</p>
+                 </div>
+             </li>-->
+
+            <li>
+                <div class="card">
+                    <p class="card-title">Provincia:</p>
+                    <p th:text="${house.province.name}"></p>
+                </div>
+            </li>
+
+            <li>
+                <div class="card">
+                    <p class="card-title">Tipo de vivienda:</p>
+                    <p th:text="${house.houseType}"></p>
+                </div>
+            </li>
+            <li>
+                <div class="card">
+                    <p class="card-title">Precio x Día:</p>
+                    <p th:text="${reserve.price}"></p>
+                </div>
+            </li> 
+
+        </ul>
+
+        <a th:href="@{/booking-reserve/booking-{id}(id=${idReserve})}" class="bookingButton" th:if="${bookingButton}">
+            <button class="button">¡Reserva esta estancia!</button>
+        </a>
+
+    </body>
+</html>

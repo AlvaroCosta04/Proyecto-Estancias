@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Formulario de Crear Cuenta</title>
+        <link rel="stylesheet" href="../css/navStyle.css">
+        <link rel="stylesheet" href="../css/createAccountStyle.css">
+        <script src="https://cdn.jsdelivr.net/npm/compressorjs@1.1.0/dist/compressor.min.js"></script>
+        <script src="../js/validarFromularioCrearCuenta.js"></script>
+    </head>
+    <body>
+
+        <nav>
+            <ul class="navul">
+                <li>
+                    <a href="#">Perfil</a>
+                    <ul class="profile">
+                        <li><a th:href="@{/user/notifications}">Notificaciones</a></li>
+                        <li><a th:href="@{/user}">Ver perfil</a></li>
+                        <li><a th:href="@{/logout}">Cerrar Sesión</a></li>
+                    </ul>
+                </li>
+                <li><a th:href="@{/home}">Inicio</a></li>
+                <li><a th:href="@{/view-reserve/myReserves-tenant}">Reservas Alquiladas</a></li>
+                <li><a th:href="@{/view-reserve/myReserves-owner}">Reservas Publicadas</a></li>
+            </ul>
+
+        </nav>
+
+        <h1>Modificar Cuenta</h1>
+        <form 
+            th:action="@{/modify/user}" 
+            method="POST"  
+            enctype="multipart/form-data">
+
+            <div th:if="${error != null}" class="alert alert-danger" role="alert">
+                <span th:text="${error}"></span>
+            </div>
+
+            <input hidden=""
+                   id="id" 
+                   name="id" 
+                   th:value="${id}">  
+
+
+            <div  class="form_imageinput" id="previsualizacion">
+                <img th:src="'data:image/png;base64,' + ${image}"
+                     onerror="this.src='http://cdn.onlinewebfonts.com/svg/img_464447.png'" class="img-profile" alt="example placeholder" style="width: 200px; height: 200px" />
+            </div>
+            <label for="nombre">Cambie su imagen</label>
+            <input 
+                type="file" 
+                class="imageFile" 
+                id="imageFile" 
+                name="imageFile" 
+                onchange="previsualizarImagen(event)"> <br><br>
+
+            <label for="nombre">Nombre:</label>
+            <input type="text" 
+                   id="name" 
+                   name="name" 
+                   th:value="${name}" 
+                   required>
+
+            <label for="apellido">Apellido:</label>
+            <input type="text" 
+                   id="lastName" 
+                   name="last_name" 
+                   th:value="${last_name}" 
+                   required>
+
+            <label for="correo">Correo electrónico:</label>
+            <input type="email" 
+                   id="email" 
+                   name="email" 
+                   th:value="${email}" 
+                   required>
+
+            <label for="userName">Nombre de usuario:</label>
+            <input type="text" 
+                   id="userName" 
+                   name="user_name" 
+                   th:value="${user_name}" 
+                   required>
+
+            <label for="descripcion">Descripción:</label>
+            <textarea class="descripcion" id="descripcion" name="description" rows="4" cols="50" th:text="${description}"></textarea>
+
+            <input type="submit" value="Modificar cuenta">
+        </form>
+    </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Formulario de Crear Cuenta</title>
+        <link rel="stylesheet" href="../css/navStyle.css">
+        <link rel="stylesheet" href="../css/createAccountStyle.css">
+        <script src="https://cdn.jsdelivr.net/npm/compressorjs@1.1.0/dist/compressor.min.js"></script>
+        <script src="../js/validarFromularioCrearCuenta.js"></script>
+    </head> 
+    <nav>
+        <ul>
+            <li><a th:href="@{/}">Inicio</a></li>
+            <li><a th:href="@{/login}">¡Inicia sesión!</a></li>
+        </ul>
+    </nav>
+    <body>
+        <form th:action="@{/signup-post/user}" 
+              method="POST"
+              enctype="multipart/form-data"
+              class="form_imageinput">
+
+            <h3>¡Añade una imagen a tu perfíl!</h3>
+            <div class="line"></div>
+
+            <div class="form_imageinput" id="previsualizacion">
+                <img src="http://cdn.onlinewebfonts.com/svg/img_464447.png" 
+                     alt="Imagen predeterminada">
+            </div> 
+
+            <input 
+                type="file" 
+                class="imageFile"
+                name="imageFile" 
+                onchange="previsualizarImagen(event)">
+
+            <p>"Ten en cuenta que luego podrás editar la foto de perfil cuando quieras".</p>
+
+            <input type="submit" value="Siguiente">
+        </form>
+
+    </body>
+</html>
